@@ -1,1 +1,1 @@
-web: gunicorn beechy_milestone_3.wsg
+web: gunicorn still_mind.wsg
