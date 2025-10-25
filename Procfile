@@ -1,1 +1,1 @@
-web: gunicorn still_mind.wsg
+web: gunicorn my_project.wsgi
