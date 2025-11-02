@@ -47,7 +47,7 @@ class PostDeleteView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):
     model = Post
     slug_field = "slug"
     slug_url_kwarg = "slug"
-    success_url = reverse_lazy("post_list")
+    success_url = reverse_lazy("still_mind:post_list")
     template_name = "still_mind/post_confirm_delete.html"
 
 # newline at end of file
