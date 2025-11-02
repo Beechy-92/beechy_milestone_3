@@ -6,11 +6,11 @@ from .forms import PostForm
 
 from django.http import HttpResponse
 def index(request):
-    return HttpResponse("StillMind is alive ✨")
+    return HttpResponse("StillMind is app for mindful blogging.")
 
 class PostListView(ListView):
     model = Post
-    queryset = Post.objects.filter(status=1).order_by("-created_on")
+    queryset = Post.objects.filter(status=1).order_by("-created_at")
     paginate_by = 5
     template_name = "still_mind/post_list.html"
 
