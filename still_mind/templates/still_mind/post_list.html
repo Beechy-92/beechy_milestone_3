@@ -1,0 +1,19 @@
+<!-- initial template -->
+{% extends "base.html" %}
+{% block title %}Posts • StillMind{% endblock %}
+{% block content %}
+  <h1 class="h3 mb-3">Recent Posts</h1>
+  {% if object_list %}
+    <ul class="list-group">
+      {% for post in object_list %}
+        <li class="list-group-item">
+          <a href="{% url 'still_mind:post_detail' post.pk %}">{{ post.title }}</a>
+          {% if post.created_at %}<small class="text-muted"> — {{ post.created_at|date:"M d, Y H:i" }}</small>{% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-secondary mt-3">No posts yet.</div>
+  {% endif %}
+{% endblock %}
+

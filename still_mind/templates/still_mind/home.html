@@ -1,0 +1,6 @@
+{% extends "still_mind/base.html" %}
+{% block title %}Home • StillMind{% endblock %}
+{% block content %}
+  <h1 class="h3">Welcome</h1>
+  <a class="btn btn-primary" href="{% url 'still_mind:post_list' %}">View Posts</a>
+{% endblock %}
