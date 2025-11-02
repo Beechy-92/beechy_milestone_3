@@ -10,9 +10,11 @@ def index(request):
 
 class PostListView(ListView):
     model = Post
-    queryset = Post.objects.filter(status=1).order_by("-created_at")
     paginate_by = 5
     template_name = "still_mind/post_list.html"
+    
+    def get_queryset(self):
+        return Post.objects.filter(status=1).order_by("-created_at")
 
 class PostDetailView(DetailView):
     model = Post
