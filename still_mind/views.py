@@ -3,6 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from .models import Post
 from .forms import PostForm
+from django.views.generic import TemplateView
 
 from django.http import HttpResponse
 def index(request):
@@ -49,5 +50,8 @@ class PostDeleteView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):
     slug_url_kwarg = "slug"
     success_url = reverse_lazy("still_mind:post_list")
     template_name = "still_mind/post_confirm_delete.html"
+
+class HomeView(TemplateView):
+    template_name = "still_mind/home.html"
 
 # newline at end of file

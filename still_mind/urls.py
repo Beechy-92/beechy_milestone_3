@@ -4,7 +4,13 @@ from . import views
 app_name = "still_mind"
 
 urlpatterns = [
-    path("", views.PostListView.as_view(), name="post_list"),
+    path("", views.HomeView.as_view(), name="home"),
+    path(
+        "posts/",
+        views.PostListView.as_view(),
+        name="post_list",
+    ),
+    
     path(
         "post/<slug:slug>/",
         views.PostDetailView.as_view(),

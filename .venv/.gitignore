@@ -1,2 +1,3 @@
 staticfiles/
 .venv/
+echo ".venv/" >> .gitignore
