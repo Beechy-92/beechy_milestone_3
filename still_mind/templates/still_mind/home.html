@@ -1,8 +1,93 @@
 {% extends "still_mind/base.html" %}
+
 {% block title %}Home • StillMind{% endblock %}
+
 {% block content %}
- <div class="text-center py-5">
-    <h1 class="h3 mb-3">Welcome to StillMind</h1>
-    <a class="btn btn-primary" href="{% url 'still_mind:post_list' %}">View Posts</a>
+
+{% if user.is_authenticated %}
+  <h1 class="mb-3">Welcome back, {{ user.username }} 👋</h1>
+
+  <div class="row mb-4">
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Your Posts</h5>
+          <p class="card-text mb-1">
+            <strong>{{ published_count|default:"0" }}</strong> published
+          </p>
+          <p class="card-text mb-0">
+            <strong>{{ draft_count|default:"0" }}</strong> drafts
+          </p>
+          <a href="{% url 'still_mind:post_list' %}" class="btn btn-sm btn-outline-primary mt-2">
+            View all posts
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Mood Snapshot</h5>
+          {% if mood_stats %}
+            <ul class="list-unstyled mb-0">
+              {% for item in mood_stats %}
+                <li>
+                  {{ item.mood|default:"(not set)" }}:
+                  <strong>{{ item.count }}</strong>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="mb-0 text-muted">No mood data yet. Try publishing some posts.</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Quick Action</h5>
+          <p class="card-text">Capture how you’re feeling right now.</p>
+          <a href="{% url 'still_mind:post_create' %}" class="btn btn-primary">
+            New Post
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <h2 class="h5 mb-3">Recent Posts</h2>
+  {% if recent_posts %}
+    <ul class="list-group">
+      {% for post in recent_posts %}
+        <li class="list-group-item">
+          <a href="{% url 'still_mind:post_detail' slug=post.slug %}">
+            {{ post.title }}
+          </a>
+          <small class="text-muted d-block">
+            {{ post.created_at|date:"M d, Y H:i" }}
+            {% if post.mood %} • Mood: {{ post.mood }}{% endif %}
+            • Status: {{ post.get_status_display }}
+          </small>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="text-muted">No posts yet. Why not create your first one?</p>
+  {% endif %}
+
+{% else %}
+  <!-- Logged-out view -->
+  <div class="text-center mt-5">
+    <h1 class="mb-3">Welcome to StillMind</h1>
+    <p class="mb-4">
+      StillMind is a mindful journaling app where you can record your thoughts,
+      track your mood, and reflect over time.
+    </p>
+    <a href="{% url 'login' %}" class="btn btn-primary">Log in to start journaling</a>
+  </div>
+{% endif %}
+
 {% endblock %}
