@@ -17,9 +17,9 @@ class TestUrls(SimpleTestCase):
         url = reverse("still_mind:post_detail", args=["sample-slug"])
         self.assertEqual(resolve(url).func.view_class, PostDetailView)
 
-    def test_post_create_url_resolves(self):
-            url = reverse("still_mind:post_create")
-            self.assertEqual(resolve(url).func.view_class, PostCreateView)
+    def test_post_create_resolves(self):
+        url = reverse("still_mind:post_create")
+        self.assertEqual(resolve(url).func.view_class, PostCreateView)
 
     def test_post_edit_url_resolves(self):
         url = reverse("still_mind:post_edit", kwargs={"slug": "example-slug"})

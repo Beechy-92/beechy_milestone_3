@@ -14,30 +14,30 @@ class AuthenticatedViewsTests(TestCase):
     def test_login_required_for_create(self):
         url = reverse("still_mind:post_create")
         response = self.client.get(url)
-        self.assertEquaL(response.status_code, 302)  # Redirect to login
-        SELF.ASSERTiN("/accounts/login/", response.url
+        self.assertEqual(response.status_code, 302)  # Redirect to login
+        self.assertIn("/accounts/login/", response.url)
                       
     def test_author_can_edit_post(self):
-        self.client.login(username="bob", password="pass"
-        url = reverse("still_mind:post_edit", kwargs={"slug": self.post.slug}
-        response = self.client.get(url
+        self.client.login(username="bob", password="pass")
+        url = reverse("still_mind:post_edit", kwargs={"slug": self.post.slug})
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_non_author_cannot_edit_post(self):
-        self.client.login(username="charlie", password="pass"
-        url = reverse("still_mind:post_edit", kwargs={"slug": self.post.slug}
-        response = self.client.get(url
+        self.client.login(username="charlie", password="pass")
+        url = reverse("still_mind:post_edit", kwargs={"slug": self.post.slug})
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 403)  # Forbidden
 
     def test_author_can_delete_post(self):
-        self.client.login(username="bob", password="pass"
-        url = reverse("still_mind:post_delete", kwargs={"slug": self.post.slug}
-        response = self.client.get(url
+        self.client.login(username="bob", password="pass")
+        url = reverse("still_mind:post_delete", kwargs={"slug": self.post.slug})
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
     def test_non_author_cannot_delete_post(self):
-        self.client.login(username="charlie", password="pass"
-        url = reverse("still_mind:post_delete", kwargs={"slug": self.post.slug}
-        response = self.client.get(url
+        self.client.login(username="charlie", password="pass")
+        url = reverse("still_mind:post_delete", kwargs={"slug": self.post.slug})
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 403)  # Forbidden
 # newline at end of file

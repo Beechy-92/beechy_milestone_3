@@ -15,7 +15,7 @@ SECRET_KEY = os.getenv(
 )
 
 # Dev vs Prod: set DEBUG=False on Heroku via Config Var
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = os.getenv("DEBUG", "False") == "False"
 
 ALLOWED_HOSTS = [
     "127.0.0.1",

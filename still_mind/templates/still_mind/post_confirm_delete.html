@@ -1,0 +1,16 @@
+{% extends "still_mind/base.html" %}
+
+{% block title %}Delete Post • StillMind{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h1 class="h4 mb-3">Delete Post</h1>
+  <p>Are you sure you want to delete “{{ object.title }}”?</p>
+
+  <form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Yes, delete</button>
+    <a class="btn btn-secondary" href="{% url 'still_mind:post_detail' slug=object.slug %}">Cancel</a>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "still_mind/base.html" %}
+
+{% block title %}{% if object %}Edit: {{ object.title }}{% else %}Create Post{% endif %} • StillMind{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h1 class="h4 mb-3">
+    {% if object %}Edit: {{ object.title }}{% else %}Create Post{% endif %}
+  </h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a class="btn btn-secondary" href="{% url 'still_mind:post_list' %}">Cancel</a>
+  </form>
+</div>
+{% endblock %}
