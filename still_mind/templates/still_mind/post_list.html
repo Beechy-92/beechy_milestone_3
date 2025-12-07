@@ -5,6 +5,12 @@
 {% block content %}
 <h1 class="h3 mb-3">Recent Posts</h1>
 
+<div class="mb-3">
+  <a href="{% url 'still_mind:post_list' %}" class="btn btn-sm btn-outline-secondary">All</a>
+  <a href="{% url 'still_mind:post_list' %}?status=published" class="btn btn-sm btn-outline-success">Published</a>
+  <a href="{% url 'still_mind:post_list' %}?status=draft" class="btn btn-sm btn-outline-warning">Drafts</a>
+</div>
+
 <a href="{% url 'still_mind:post_create' %}" class="btn btn-primary mb-3">
   New Post
 </a>

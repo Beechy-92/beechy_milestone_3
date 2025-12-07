@@ -30,12 +30,15 @@ class PostListView(LoginRequiredMixin, ListView):
     context_object_name = "posts"
 
     def get_queryset(self):
-        # Only published posts for THIS user
-        return (
-            Post.objects
-            .filter(author=self.request.user, status=1)
-            .order_by("-created_at")
-        )
+    qs = Post.objects.filter(author=self.request.user).order_by("-created_at")
+
+    status = self.request.GET.get("status")
+    if status == "published":
+        qs = qs.filter(status=1)
+    elif status == "draft":
+        qs = qs.filter(status=0)
+
+    return qs
 
 
 class PostDetailView(LoginRequiredMixin, AuthorRequiredMixin, DetailView):
