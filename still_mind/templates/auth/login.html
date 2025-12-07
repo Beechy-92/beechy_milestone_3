@@ -1,32 +1,38 @@
 {% extends "still_mind/base.html" %}
 
-{% block title %}Login – StillMind{% endblock %}
+{% block title %}Login • StillMind{% endblock %}
 
 {% block content %}
-<h1 class="mb-3">Login</h1>
+<div class="row justify-content-center">
+  <div class="col-md-6 col-lg-4">
+    <h1 class="h3 mb-3 text-center">Login</h1>
 
-{% if form.errors %}
-  <div class="alert alert-danger">
-    Please check your username and password and try again.
+    {% if form.errors %}
+      <div class="alert alert-danger" role="alert">
+        Please check your username and password and try again.
+      </div>
+    {% endif %}
+
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="mb-3">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {{ form.username.errors }}
+      </div>
+
+      <div class="mb-3">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        {{ form.password.errors }}
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100">
+        Log in
+      </button>
+    </form>
   </div>
-{% endif %}
-
-<form method="post" class="mt-3" action="{% url 'login' %}">
-  {% csrf_token %}
-  {{ form.non_field_errors }}
-
-  <div class="mb-3">
-    {{ form.username.label_tag }}
-    {{ form.username }}
-    {{ form.username.errors }}
-  </div>
-
-  <div class="mb-3">
-    {{ form.password.label_tag }}
-    {{ form.password }}
-    {{ form.password.errors }}
-  </div>
-
-  <button type="submit" class="btn btn-primary">Log in</button>
-</form>
+</div>
 {% endblock %}

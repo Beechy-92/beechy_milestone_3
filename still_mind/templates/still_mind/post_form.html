@@ -1,18 +1,57 @@
 {% extends "still_mind/base.html" %}
 
-{% block title %}{% if object %}Edit: {{ object.title }}{% else %}Create Post{% endif %} • StillMind{% endblock %}
+{% block title %}
+  {% if object %}Edit Post • StillMind{% else %}New Post • StillMind{% endif %}
+{% endblock %}
 
 {% block content %}
-<div class="container py-4">
-  <h1 class="h4 mb-3">
-    {% if object %}Edit: {{ object.title }}{% else %}Create Post{% endif %}
-  </h1>
+<h1 class="h3 mb-3">
+  {% if object %}Edit Post{% else %}New Post{% endif %}
+</h1>
 
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-primary" type="submit">Save</button>
-    <a class="btn btn-secondary" href="{% url 'still_mind:post_list' %}">Cancel</a>
-  </form>
-</div>
+<form method="post" novalidate>
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <div class="mb-3">
+    {{ form.title.label_tag }}
+    {{ form.title }}
+    <div class="form-text">Give your reflection a clear, short title.</div>
+    {{ form.title.errors }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.mood.label_tag }}
+    {{ form.mood }}
+    <div class="form-text">Describe your mood in a word or short phrase.</div>
+    {{ form.mood.errors }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.summary.label_tag }}
+    {{ form.summary }}
+    <div class="form-text">Optional: a short summary of what this entry is about.</div>
+    {{ form.summary.errors }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.content.label_tag }}
+    {{ form.content }}
+    {{ form.content.errors }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.status.label_tag }}
+    {{ form.status }}
+    <div class="form-text">Save as draft if you’re not ready to publish yet.</div>
+    {{ form.status.errors }}
+  </div>
+
+  <button type="submit" class="btn btn-primary">
+    {% if object %}Save Changes{% else %}Create Post{% endif %}
+  </button>
+  <a href="{% url 'still_mind:post_list' %}" class="btn btn-outline-secondary">
+    Cancel
+  </a>
+</form>
 {% endblock %}

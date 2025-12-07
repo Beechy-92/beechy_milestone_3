@@ -8,6 +8,7 @@
 <p class="text-muted">
   {{ post.created_at|date:"d M Y, H:i" }}
   {% if post.mood %}| Mood: {{ post.mood }}{% endif %}
+  • Status: {{ post.get_status_display }}
 </p>
 
 {% if post.summary %}
