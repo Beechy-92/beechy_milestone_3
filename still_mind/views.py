@@ -4,7 +4,7 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.db.models import Count
+from django.db.models import Count, Q
 
 from .models import Post
 from .forms import PostForm
@@ -33,11 +33,22 @@ class PostListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         qs = Post.objects.filter(author=self.request.user).order_by("-created_at")
 
+        # Status filter (all / published / draft)
         status = self.request.GET.get("status")
         if status == "published":
             qs = qs.filter(status=1)
         elif status == "draft":
             qs = qs.filter(status=0)
+
+        # Search filter
+        query = self.request.GET.get("q")
+        if query:
+            qs = qs.filter(
+                Q(title__icontains=query)
+                | Q(summary__icontains=query)
+                | Q(content__icontains=query)
+                | Q(mood__icontains=query)
+            )
 
         return qs
 
