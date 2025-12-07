@@ -1,2 +1,168 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'site.css' %}">
+/* ==========
+   Global theme
+   ========== */
+
+:root {
+  --sm-bg: #f4f7fb;
+  --sm-accent: #5c8d89;
+  --sm-accent-soft: #c2ddd8;
+  --sm-accent-strong: #336b63;
+  --sm-card: #ffffff;
+  --sm-text-main: #20313b;
+  --sm-text-muted: #6c7a86;
+  --sm-danger: #d9534f;
+  --sm-radius-lg: 0.9rem;
+  --sm-shadow-soft: 0 12px 35px rgba(16, 41, 49, 0.10);
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #e6f0ff, #f5f7fb);
+  color: var(--sm-text-main);
+}
+
+/* Main layout */
+main[role="main"] {
+  min-height: 80vh;
+}
+
+/* ==========
+   Navbar
+   ========== */
+
+.navbar {
+  background: rgba(255, 255, 255, 0.96) !important;
+  box-shadow: 0 6px 20px rgba(10, 39, 52, 0.06);
+  backdrop-filter: blur(12px);
+}
+
+.navbar-brand {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  color: var(--sm-accent-strong) !important;
+}
+
+.nav-link {
+  color: var(--sm-text-muted) !important;
+}
+
+.nav-link.active,
+.nav-link:hover {
+  color: var(--sm-accent-strong) !important;
+}
+
+/* ==========
+   Cards & panels
+   ========== */
+
+.card {
+  border-radius: var(--sm-radius-lg);
+  border: none;
+  box-shadow: var(--sm-shadow-soft);
+  background: var(--sm-card);
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+/* ==========
+   Buttons
+   ========== */
+
+.btn-primary {
+  background-color: var(--sm-accent);
+  border-color: var(--sm-accent);
+}
+
+.btn-primary:hover {
+  background-color: var(--sm-accent-strong);
+  border-color: var(--sm-accent-strong);
+}
+
+.btn-outline-secondary,
+.btn-secondary {
+  border-radius: 999px;
+}
+
+.btn,
+.form-control {
+  border-radius: 999px;
+}
+
+/* Smaller filter buttons */
+.btn-group .btn {
+  border-radius: 999px !important;
+}
+
+/* ==========
+   Forms
+   ========== */
+
+.form-control {
+  border: 1px solid #d2dde7;
+  padding: 0.55rem 0.9rem;
+}
+
+.form-control:focus {
+  border-color: var(--sm-accent-soft);
+  box-shadow: 0 0 0 0.2rem rgba(92, 141, 137, 0.15);
+}
+
+/* Textarea: keep slightly rounded but not full pill */
+textarea.form-control {
+  border-radius: 0.75rem;
+}
+
+/* ==========
+   Lists & posts
+   ========== */
+
+.list-group-item {
+  border: none;
+  border-radius: 0.75rem;
+  margin-bottom: 0.5rem;
+  box-shadow: 0 4px 16px rgba(10, 39, 52, 0.06);
+}
+
+.list-group-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(10, 39, 52, 0.10);
+}
+
+/* ==========
+   Headings & text
+   ========== */
+
+h1, h2, h3, h4 {
+  color: var(--sm-text-main);
+  letter-spacing: 0.01em;
+}
+
+.text-muted {
+  color: var(--sm-text-muted) !important;
+}
+
+/* ==========
+   Auth pages
+   ========== */
+
+.auth-card {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+/* ==========
+   Utility
+   ========== */
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.sm-hero .card {
+  background: linear-gradient(135deg, rgba(92, 141, 137, 0.08), rgba(255, 255, 255, 0.95));
+  border-radius: 1.1rem;
+  box-shadow: 0 12px 32px rgba(16, 41, 49, 0.08);
+}
