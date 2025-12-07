@@ -44,7 +44,7 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         
-        return reverse("still_mind:post_detail", args=[self.pk])
+        return reverse("still_mind:post_detail", kwargs={"slug": self.slug})
 
     def save(self, *args, **kwargs):
         """

@@ -120,3 +120,9 @@ STORAGES = {
 
 # --- Default primary key field type ---
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# --- Login ---
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "still_mind:post_list"
+LOGOUT_REDIRECT_URL = "still_mind:home"
+
