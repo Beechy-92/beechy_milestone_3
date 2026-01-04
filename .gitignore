@@ -1,0 +1,4 @@
+staticfiles/
+.venv/
+echo ".venv/" >> .gitignore
+env.py
