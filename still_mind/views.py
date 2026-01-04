@@ -5,7 +5,7 @@ from django.views.generic import (
 )
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Count, Q
-
+from django.http import Http404
 from .models import Post
 from .forms import PostForm
 
@@ -17,7 +17,7 @@ def index(request):
 class AuthorRequiredMixin(UserPassesTestMixin):
     """
     Mixin to ensure the logged-in user is the author of the object.
-    Used on detail / edit / delete views.
+    Used on edit / delete views.
     """
     def test_func(self):
         obj = self.get_object()
@@ -58,6 +58,10 @@ class PostDetailView(LoginRequiredMixin, AuthorRequiredMixin, DetailView):
     template_name = "still_mind/post_detail.html"
     slug_field = "slug"
     slug_url_kwarg = "slug"
+    context_object_name = "post"
+
+    def get_queryset(self):
+        return Post.objects.filter(author=self.request.user)
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
