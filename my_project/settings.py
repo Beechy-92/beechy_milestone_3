@@ -8,8 +8,8 @@ if os.path.exists("env.py"):
 # --- Base paths ---
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Dev vs Prod: set DEBUG=False on Heroku via Config Var
-DEBUG = os.getenv("DEBUG", "False") == "True"
+# Dev vs Prod:
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
