@@ -28,7 +28,7 @@ urlpatterns = [
     path("accounts/logout/", auth_views.LogoutView.as_view(), name="logout"),
 
     # About page
-    path("about/", about_views.about_me, name="about_me"),
+    path("about/", about_views.about, name="about"),
 
     # Main app routes
     path("", include("still_mind.urls")),

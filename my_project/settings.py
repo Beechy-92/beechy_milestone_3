@@ -8,6 +8,12 @@ if os.path.exists("env.py"):
 # --- Base paths ---
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# --- Security ---
+SECRET_KEY = os.getenv(
+    "SECRET_KEY",
+    "django-insecure-=-)mp_r5*(4qmdb9myo61q#4jm=$vy_9eic-5wnky9lgw!b1&k",
+)
+
 # Dev vs Prod:
 DEBUG = True
 

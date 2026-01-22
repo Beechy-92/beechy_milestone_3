@@ -1,0 +1,29 @@
+{% extends "still_mind/base.html" %}
+{# If your base is located elsewhere, change the extends path accordingly #}
+
+{% block title %}Welcome to StillMind{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+
+    <h1 class="display-5 fw-bold mb-4">Welcome to StillMind</h1>
+    <p class="lead">
+        StillMind is your private space for journaling, reflection, 
+        and mindful writing — accessible only to you.
+    </p>
+
+    {% if not user.is_authenticated %}
+    <div class="mt-4">
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg me-2">Log In</a>
+        <a href="{% url 'signup' %}" class="btn btn-outline-secondary btn-lg">Sign Up</a>
+    </div>
+    {% else %}
+    <div class="mt-4">
+        <a href="{% url 'still_mind:post_list' %}" class="btn btn-primary btn-lg">
+            Go to My Journal
+        </a>
+    </div>
+    {% endif %}
+
+</div>
+{% endblock %}
