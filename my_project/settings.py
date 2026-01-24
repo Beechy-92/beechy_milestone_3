@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv(
 )
 
 # Dev vs Prod:
-DEBUG = "True"
+DEBUG = "False"
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
