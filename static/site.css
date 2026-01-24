@@ -166,3 +166,44 @@ h1, h2, h3, h4 {
   border-radius: 1.1rem;
   box-shadow: 0 12px 32px rgba(16, 41, 49, 0.08);
 }
+
+/* --- Review banner --- */
+.review-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(33, 37, 41, 0.98); /* dark, like Bootstrap bg-dark */
+    color: #f8f9fa;
+    font-size: 0.9rem;
+    z-index: 1030; /* above navbar/footer */
+    overflow: hidden;
+    border-top: 1px solid rgba(248, 249, 250, 0.3);
+}
+
+.review-track {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: review-scroll 40s linear infinite;
+}
+
+.review-item {
+    padding: 0.5rem 2rem;
+    display: inline-block;
+    opacity: 0.9;
+}
+
+/* Slow horizontal scrolling */
+@keyframes review-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Avoid banner covering page content on small screens */
+body {
+    padding-bottom: 40px; /* adjust if the banner is taller */
+}
