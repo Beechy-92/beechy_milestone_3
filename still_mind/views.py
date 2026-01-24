@@ -9,6 +9,7 @@ from django.db.models import Count, Q
 from django.http import Http404
 from .models import Post
 from .forms import PostForm
+from django.contrib import messages
 
 
 def index(request):
@@ -75,7 +76,9 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        return super().form_valid(form)
+        response = super().form_valid(form)
+        messages.success(self.request, "Your journal entry has been created.")
+        return response
 
 
 class PostUpdateView(LoginRequiredMixin, AuthorRequiredMixin, UpdateView):
@@ -85,6 +88,11 @@ class PostUpdateView(LoginRequiredMixin, AuthorRequiredMixin, UpdateView):
     slug_field = "slug"
     slug_url_kwarg = "slug"
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        messages.success(self.request, "Your journal entry has been updated.")
+        return response
+
 
 class PostDeleteView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):
     model = Post
@@ -92,6 +100,11 @@ class PostDeleteView(LoginRequiredMixin, AuthorRequiredMixin, DeleteView):
     slug_url_kwarg = "slug"
     success_url = reverse_lazy("still_mind:post_list")
     template_name = "still_mind/post_confirm_delete.html"
+
+    def delete(self, request, *args, **kwargs):
+        response = super().delete(request, *args, **kwargs)
+        messages.success(request, "Your journal entry has been deleted.")
+        return response
 
 
 class HomeView(TemplateView):
