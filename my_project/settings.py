@@ -10,12 +10,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # --- Security ---
 SECRET_KEY = os.getenv(
-    "SECRET_KEY",
-    "django-insecure-=-)mp_r5*(4qmdb9myo61q#4jm=$vy_9eic-5wnky9lgw!b1&k",
+    "SECRET_KEY"
 )
 
 # Dev vs Prod:
-DEBUG = True
+DEBUG = "True"
 
 ALLOWED_HOSTS = [
     "127.0.0.1",

@@ -2,6 +2,8 @@ staticfiles/
 .venv/
 echo ".venv/" >> .gitignore
 env.py
+__pycache__/
+*.pyc
 # --- Security ---
 SECRET_KEY = os.getenv(
     "SECRET_KEY",
