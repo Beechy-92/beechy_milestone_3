@@ -4,16 +4,6 @@ echo ".venv/" >> .gitignore
 env.py
 __pycache__/
 *.pyc
-# --- Security ---
-SECRET_KEY = os.getenv(
-    "SECRET_KEY",
-    "django-insecure-=-)mp_r5*(4qmdb9myo61q#4jm=$vy_9eic-5wnky9lgw!b1&k",
-)
-username - ashbeech
-password - newpassword123
-debug = false
-# --- End Security ---
+db.sqlite3
+staticfiles/
 
-Username: assessor_admin
-Email address: assessor_admin@stillmind.com
-Password: assessor1234
