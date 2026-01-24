@@ -32,6 +32,9 @@ urlpatterns = [
 
     # Main app routes
     path("", include("still_mind.urls")),
+
+    # ...your existing paths...
+    path("accounts/", include("django.contrib.auth.urls")),
 ]
 
 handler404 = "django.views.defaults.page_not_found"
