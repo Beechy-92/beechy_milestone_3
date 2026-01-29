@@ -27,11 +27,11 @@
 
   <!-- DASHBOARD CARDS -->
   <div class="row g-4 mb-4">
-    <!-- Your Posts card -->
+    <!-- Your Posts -->
     <div class="col-md-4">
       <div class="card h-100">
         <div class="card-body">
-          <h5 class="card-title">Your Posts</h5>
+          <h2 class="h5 card-title">Your Posts</h2>
           <p class="mb-1">
             <strong>{{ published_count|default:"0" }}</strong> published
           </p>
@@ -45,34 +45,37 @@
       </div>
     </div>
 
-    <!-- Mood Snapshot card -->
+    <!-- Mood Snapshot -->
     <div class="col-md-4">
       <div class="card h-100">
         <div class="card-body">
-          <h5 class="card-title">Mood Snapshot</h5>
+          <h2 class="h5 card-title">Mood Snapshot</h2>
+
           {% if mood_stats %}
             <ul class="list-unstyled mb-0">
               {% for item in mood_stats %}
-                <li>
-                  <span class="text-capitalize">{{ item.mood|default:"(not set)" }}:</span>
+                <li class="d-flex justify-content-between">
+                  <span class="text-capitalize">{{ item.mood|default:"(not set)" }}</span>
                   <strong>{{ item.count }}</strong>
                 </li>
               {% endfor %}
             </ul>
           {% else %}
-            <p class="text-muted mb-0">No mood data yet. Reflect more to see patterns.</p>
+            <p class="text-muted mb-0">
+              No mood data yet. Create a few published reflections to see patterns.
+            </p>
           {% endif %}
         </div>
       </div>
     </div>
 
-    <!-- Quick Action card -->
+    <!-- Quick Action -->
     <div class="col-md-4">
       <div class="card h-100">
         <div class="card-body">
-          <h5 class="card-title">Quick Action</h5>
+          <h2 class="h5 card-title">Quick Action</h2>
           <p class="mb-3">
-            Capture a quick moment or thought before you forget it.
+            Capture a quick thought before you forget it.
           </p>
           <a href="{% url 'still_mind:post_create' %}" class="btn btn-primary">
             New Post
@@ -85,14 +88,16 @@
   <!-- RECENT POSTS -->
   <section>
     <h2 class="h5 mb-3">Recent Reflections</h2>
+
     {% if recent_posts %}
       <ul class="list-group">
         {% for post in recent_posts %}
           <li class="list-group-item">
-            <a href="{% url 'still_mind:post_detail' slug=post.slug %}">
+            <a href="{% url 'still_mind:post_detail' slug=post.slug %}" class="fw-semibold text-decoration-none">
               {{ post.title }}
             </a>
-            <small class="text-muted d-block">
+
+            <small class="text-muted d-block mt-1">
               {{ post.created_at|date:"M d, Y H:i" }}
               {% if post.mood %} • Mood: {{ post.mood }}{% endif %}
               • Status: {{ post.get_status_display }}
@@ -101,14 +106,16 @@
         {% endfor %}
       </ul>
     {% else %}
-      <p class="text-muted">You haven't written anything yet. Ready to begin?</p>
+      <p class="text-muted mb-0">
+        You haven't written anything yet. Ready to begin?
+      </p>
     {% endif %}
   </section>
 
 {% else %}
 
   <!-- LOGGED OUT VIEW -->
-  <div class="text-center mt-5 mb-5">
+  <div class="text-center py-5">
     <h1 class="display-5 mb-3">Welcome to StillMind</h1>
     <p class="lead text-muted mb-4">
       Your space for mindful journaling and emotional clarity.
